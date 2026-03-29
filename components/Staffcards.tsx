@@ -1,27 +1,44 @@
-import { connectDB } from "@/lib/mongodb"
-import Image from "next/image"
+"use client"
+import { useEffect, useState } from "react"
 
 interface StaffMember {
-  id: string
-  name: string
-  photo: string
+  id    : string
+  name  : string
+  photo : string
   address: string
-  email: string
+  email : string
   mobile: string
 }
 
-async function getStaff(): Promise<StaffMember[]> {
-  try {
-    const { db } = await connectDB()
-    const doc = await db.collection("site_pages").findOne({ key: "staff" })
-    return Array.isArray(doc?.value?.staff) ? doc.value.staff : []
-  } catch {
-    return []
-  }
-}
+export default function StaffCards() {
+  const [staff,   setStaff]   = useState<StaffMember[]>([])
+  const [loading, setLoading] = useState(true)
 
-export default async function StaffCards() {
-  const staff = await getStaff()
+  useEffect(() => {
+    fetch("/api/staff")
+      .then(r => r.json())
+      .then(data => setStaff(Array.isArray(data) ? data : []))
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-2">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse">
+            <div className="w-24 h-24 rounded-full bg-gray-100 mx-auto mb-4" />
+            <div className="h-4 bg-gray-100 rounded w-3/4 mx-auto mb-6" />
+            <div className="space-y-3">
+              <div className="h-3 bg-gray-100 rounded w-full" />
+              <div className="h-3 bg-gray-100 rounded w-5/6" />
+              <div className="h-3 bg-gray-100 rounded w-4/6" />
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   if (staff.length === 0) {
     return (
@@ -40,7 +57,7 @@ export default async function StaffCards() {
       {staff.map((member, i) => (
         <div
           key={member.id}
-          className="group relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+          className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           style={{ animationDelay: `${i * 60}ms` }}
         >
           <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-400" />
@@ -49,12 +66,11 @@ export default async function StaffCards() {
             <div className="flex justify-center mb-4">
               <div className="relative w-24 h-24 rounded-full ring-4 ring-emerald-50 ring-offset-2 overflow-hidden bg-gray-100 shrink-0">
                 {member.photo ? (
-                  <Image
+                  // ✅ plain img — no Next.js Image domain config needed for dynamic URLs
+                  <img
                     src={member.photo}
                     alt={member.name}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-teal-100">

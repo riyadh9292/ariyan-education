@@ -1,130 +1,96 @@
-import { connectDB } from "@/lib/mongodb"
-import Image from "next/image"
+"use client"
+import { useEffect, useState } from "react"
 
 interface Photo {
-  id: string
-  url: string
-  caption: string
-  uploadedAt: string
+  id      : string
+  url     : string
+  caption : string
 }
 
-async function getPhotos(): Promise<Photo[]> {
-  try {
-    const { db } = await connectDB()
-    const doc = await db.collection("site_pages").findOne({ key: "academic-photos" })
-    return Array.isArray(doc?.value?.photos) ? doc.value.photos : []
-  } catch {
-    return []
+export default function PhotoGallery() {
+  const [photos,  setPhotos]  = useState<Photo[]>([])
+  const [loading, setLoading] = useState(true)
+  const [preview, setPreview] = useState<Photo | null>(null)
+
+  useEffect(() => {
+    fetch("/api/photos")
+      .then(r => r.json())
+      .then(data => setPhotos(Array.isArray(data) ? data : []))
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+        {[...Array(8)].map((_, i) => (
+          <div key={i} className="aspect-square rounded-xl bg-gray-100 animate-pulse" />
+        ))}
+      </div>
+    )
   }
-}
-
-export default async function PhotoGallery() {
-  const photos = await getPhotos()
 
   if (photos.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-gray-300">
-        <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
+      <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+        <svg className="w-14 h-14 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
-        <p className="text-lg font-medium text-gray-400">এখনো কোনো ছবি যুক্ত করা হয়নি।</p>
+        <p className="text-lg font-medium">কোনো ছবি যুক্ত করা হয়নি।</p>
       </div>
     )
   }
 
   return (
     <>
-      <style>{`
-        .gallery-item { break-inside: avoid; }
-        .lightbox-input { display: none; }
-        .lightbox-input:checked ~ .lightbox-overlay { opacity: 1; pointer-events: all; }
-        .lightbox-input:checked ~ .lightbox-overlay .lightbox-content { transform: scale(1); opacity: 1; }
-        .lightbox-overlay {
-          position: fixed; inset: 0; z-index: 9999;
-          background: rgba(0,0,0,0.93);
-          display: flex; align-items: center; justify-content: center;
-          opacity: 0; pointer-events: none;
-          transition: opacity 0.3s ease;
-        }
-        .lightbox-content {
-          position: relative; max-width: 90vw; max-height: 90vh;
-          transform: scale(0.92); opacity: 0;
-          transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .lightbox-close {
-          position: absolute; top: -44px; right: 0;
-          color: white; font-size: 28px; cursor: pointer;
-          width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-          border-radius: 50%; transition: background 0.2s;
-        }
-        .lightbox-close:hover { background: rgba(255,255,255,0.15); }
-        .gallery-trigger { cursor: zoom-in; }
-        .gallery-card:hover .gallery-overlay { opacity: 1; }
-        .gallery-card:hover img { transform: scale(1.05); }
-      `}</style>
-
-      <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
-        {photos.map((photo, i) => {
-          const inputId = `lb-${photo.id}`
-          return (
-            <div key={photo.id} className="gallery-item">
-              {/* Hidden checkbox for lightbox toggle */}
-              <input type="checkbox" id={inputId} className="lightbox-input" />
-
-              {/* Lightbox overlay */}
-              <div className="lightbox-overlay">
-                <label htmlFor={inputId} className="absolute inset-0 cursor-zoom-out" />
-                <div className="lightbox-content">
-                  <label htmlFor={inputId} className="lightbox-close">✕</label>
-                  <div className="relative w-[80vw] max-w-4xl" style={{ maxHeight: "80vh" }}>
-                    <img
-                      src={photo.url}
-                      alt={photo.caption || `ছবি ${i + 1}`}
-                      className="rounded-xl shadow-2xl max-h-[80vh] w-auto mx-auto object-contain"
-                    />
-                    {photo.caption && (
-                      <p className="text-center text-white/80 text-sm mt-3 px-4">{photo.caption}</p>
-                    )}
-                  </div>
-                </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+        {photos.map((photo) => (
+          <div
+            key={photo.id}
+            onClick={() => setPreview(photo)}
+            className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer bg-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <img
+              src={photo.url}
+              alt={photo.caption}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            {photo.caption && (
+              <div className="absolute inset-x-0 bottom-0 px-3 py-2 text-xs text-white font-medium truncate opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)" }}>
+                {photo.caption}
               </div>
-
-              {/* Gallery card */}
-              <label
-                htmlFor={inputId}
-                className="gallery-card gallery-trigger block relative rounded-xl overflow-hidden bg-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={photo.url}
-                    alt={photo.caption || `ছবি ${i + 1}`}
-                    className="w-full h-auto object-cover transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Hover overlay */}
-                <div className="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 flex items-end p-3">
-                  {photo.caption ? (
-                    <p className="text-white text-xs leading-snug line-clamp-2">{photo.caption}</p>
-                  ) : (
-                    <div className="ml-auto">
-                      <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-              </label>
-            </div>
-          )
-        })}
+            )}
+          </div>
+        ))}
       </div>
 
-      <p className="text-center text-xs text-gray-400 mt-8">মোট {photos.length}টি ছবি</p>
+      {/* Lightbox */}
+      {preview && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.85)" }}
+          onClick={() => setPreview(null)}
+        >
+          <div className="relative max-w-4xl w-full" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setPreview(null)}
+              className="absolute -top-10 right-0 text-white/70 hover:text-white text-sm flex items-center gap-1"
+            >
+              ✕ বন্ধ করুন
+            </button>
+            <img
+              src={preview.url}
+              alt={preview.caption}
+              className="w-full max-h-[80vh] object-contain rounded-xl"
+            />
+            {preview.caption && (
+              <p className="text-center text-white/70 text-sm mt-3">{preview.caption}</p>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }

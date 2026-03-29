@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getMenu, getAllSlugs } from "@/lib/menu"
-import { connectDB } from "@/lib/mongodb"
-import ResultTable from "@/components/ResultTable"
-import StaffCards from "@/components/Staffcards"
-import PhotoGallery from "@/components/PhotoGallery"
-import VideoGallery from "@/components/VideoGallery"
+import PageContent from "@/components/PageContent"
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs()
@@ -16,7 +12,7 @@ export default async function Page({ params }: any) {
   const menu = await getMenu()
 
   let title = slug
-  let content = "এই পেজের কনটেন্ট শীঘ্রই যুক্ত করা হবে।"
+  // let content = "এই পেজের কনটেন্ট শীঘ্রই যুক্ত করা হবে।"
 
   // find title from menu
   menu.forEach((item: any) => {
@@ -26,35 +22,5 @@ export default async function Page({ params }: any) {
     })
   })
 
-  // fetch page data from MongoDB
-  const { db } = await connectDB()
-  const doc = await db.collection("site_pages").findOne({ key: slug })
-  console.log(doc,"doc");
-  
-
-  if (doc?.value) {
-    title = doc.value.title ?? title
-    content = doc.value.content ?? content
-  }
-
-  return (
-    <div className="max-w-5xl mx-auto py-16 px-6">
-      <h1 className="text-3xl font-bold mb-6">{title}</h1>
-
-      {slug === "results" ? (
-        <ResultTable />
-      ) : slug === "staff" ? (
-        <StaffCards />
-      ) : slug === "academic-photos" ? (
-        <PhotoGallery />
-      ) : slug === "academic-videos" ? (
-        <VideoGallery />
-      ) : (
-        <div
-          dangerouslySetInnerHTML={{ __html: content }}
-          className="text-gray-700 leading-7"
-        />
-      )}
-    </div>
-  )
+  return <PageContent slug={slug} defaultTitle={title} />
 }

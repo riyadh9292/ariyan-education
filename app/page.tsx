@@ -62,11 +62,7 @@ export default function Home() {
 
       {/* ── Notice board ─────────────────────────────────────────────── */}
       <NoticeBoard />
-
-      {/* ── Footer strip ─────────────────────────────────────────────── */}
-      <div className="text-center pb-8 text-xs text-gray-400">
-        © {new Date().getFullYear()} আরিয়ান এডুকেশন সেন্টার — সকল স্বত্ব সংরক্ষিত
-      </div>
+      
     </div>
   )
 }

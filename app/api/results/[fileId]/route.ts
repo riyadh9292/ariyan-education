@@ -4,11 +4,11 @@ import { ObjectId } from "mongodb"
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { fileId: string } }
+  context: { params: Promise<{ fileId: string }> }
 ) {
     
   try {
-    const { fileId } = await params
+    const { fileId } = await context.params
     const bucket = await getGridFSBucket()
     const objectId = new ObjectId(fileId)
 

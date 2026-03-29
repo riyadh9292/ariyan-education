@@ -1,10 +1,20 @@
-import fs from "fs"
-import path from "path"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// lib/fileDb.ts
+// Drop-in replacement — same API as before but reads/writes MongoDB instead of JSON files
 
-const dataDir = path.join(process.cwd(), "data")
+import { connectDB } from "@/lib/mongodb"
 
-export function readJson(file: string) {
-  const filePath = path.join(dataDir, file)
-  const data = fs.readFileSync(filePath, "utf-8")
-  return JSON.parse(data)
+export async function readDb(key: string) {
+  const { db } = await connectDB()
+  const doc = await db.collection("site_data").findOne({ key })
+  return doc?.value ?? null
+}
+
+export async function writeDb(key: string, value: any) {
+  const { db } = await connectDB()
+  await db.collection("site_data").updateOne(
+    { key },
+    { $set: { key, value, updatedAt: new Date() } },
+    { upsert: true }   // insert if not exists, update if exists
+  )
 }

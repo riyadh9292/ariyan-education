@@ -20,6 +20,7 @@ export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
   return { client, db }
 }
 
+
 export async function getGridFSBucket(): Promise<GridFSBucket> {
   const { db } = await connectDB()
   return new GridFSBucket(db, { bucketName: "results" })
@@ -28,4 +29,9 @@ export async function getGridFSBucket(): Promise<GridFSBucket> {
 export async function getNoticesBucket(): Promise<GridFSBucket> {
   const { db } = await connectDB()
   return new GridFSBucket(db, { bucketName: "noticesFiles" })
+}
+
+export async function getCollection(name: string) {
+  const { db } = await connectDB()
+  return db.collection(name)
 }

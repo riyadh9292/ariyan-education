@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { readJson } from "@/lib/fileDb"
 import Image from "next/image"
+import { getMenu } from "@/lib/menu"
 
-export default function Header() {
-  const menu = readJson("menu.json")
+export default async function Header() {
+  const menu = await getMenu()
 
   return (
     <header className="fixed top-0 z-50 bg-white shadow w-full">

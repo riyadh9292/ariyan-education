@@ -1,30 +1,20 @@
 import { NextRequest, NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+import { connectDB } from "@/lib/mongodb"
 
-const STAFF_FILE = path.join(process.cwd(), "data", "pages", "staff.json")
-
-function readFile() {
-  if (!fs.existsSync(STAFF_FILE)) return {}
-  try {
-    return JSON.parse(fs.readFileSync(STAFF_FILE, "utf-8"))
-  } catch {
-    return {}
-  }
-}
-
-// GET — return only the staff array
+// GET — return only the staff array from site_pages
 export async function GET() {
   try {
-    const data = readFile()
-    return NextResponse.json(Array.isArray(data.staff) ? data.staff : [])
+    const { db } = await connectDB()
+    const doc = await db.collection("site_pages").findOne({ key: "staff" })
+    const staff = Array.isArray(doc?.value?.staff) ? doc.value.staff : []
+    return NextResponse.json(staff)
   } catch (err) {
     console.error("Staff GET error:", err)
     return NextResponse.json([], { status: 500 })
   }
 }
 
-// POST — merge staff array into existing file, preserve title & content
+// POST — update only the staff array, preserve title & content
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -33,14 +23,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Expected an array" }, { status: 400 })
     }
 
-    const existing = readFile()
+    const { db } = await connectDB()
+    await db.collection("site_pages").updateOne(
+      { key: "staff" },
+      { $set: { "value.staff": body, updatedAt: new Date() } },
+      { upsert: true }
+    )
 
-    const updated = {
-      ...existing,   // keeps title, content, and any other fields untouched
-      staff: body,
-    }
-
-    fs.writeFileSync(STAFF_FILE, JSON.stringify(updated, null, 2), "utf-8")
     return NextResponse.json({ message: "Staff data saved successfully" })
   } catch (err) {
     console.error("Staff POST error:", err)

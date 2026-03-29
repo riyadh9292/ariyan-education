@@ -1,5 +1,4 @@
-import fs from "fs"
-import path from "path"
+import { connectDB } from "@/lib/mongodb"
 import Image from "next/image"
 
 interface StaffMember {
@@ -11,20 +10,18 @@ interface StaffMember {
   mobile: string
 }
 
-function getStaff(): StaffMember[] {
+async function getStaff(): Promise<StaffMember[]> {
   try {
-    const filePath = path.join(process.cwd(), "data", "pages", "staff.json")
-    if (!fs.existsSync(filePath)) return []
-    const raw = fs.readFileSync(filePath, "utf-8")
-    const data = JSON.parse(raw)
-    return Array.isArray(data.staff) ? data.staff : []
+    const { db } = await connectDB()
+    const doc = await db.collection("site_pages").findOne({ key: "staff" })
+    return Array.isArray(doc?.value?.staff) ? doc.value.staff : []
   } catch {
     return []
   }
 }
 
-export default function StaffCards() {
-  const staff = getStaff()
+export default async function StaffCards() {
+  const staff = await getStaff()
 
   if (staff.length === 0) {
     return (
@@ -46,11 +43,9 @@ export default function StaffCards() {
           className="group relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           style={{ animationDelay: `${i * 60}ms` }}
         >
-          {/* Top accent bar */}
           <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-400" />
 
           <div className="p-6">
-            {/* Photo */}
             <div className="flex justify-center mb-4">
               <div className="relative w-24 h-24 rounded-full ring-4 ring-emerald-50 ring-offset-2 overflow-hidden bg-gray-100 shrink-0">
                 {member.photo ? (
@@ -71,15 +66,12 @@ export default function StaffCards() {
               </div>
             </div>
 
-            {/* Name */}
             <h3 className="text-center text-lg font-bold text-gray-800 mb-4 leading-snug">
               {member.name}
             </h3>
 
-            {/* Divider */}
             <div className="border-t border-dashed border-gray-100 mb-4" />
 
-            {/* Info rows */}
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2.5 text-gray-600">
                 <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center">
@@ -100,10 +92,7 @@ export default function StaffCards() {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <a
-                  href={`mailto:${member.email}`}
-                  className="truncate hover:text-emerald-600 transition-colors"
-                >
+                <a href={`mailto:${member.email}`} className="truncate hover:text-emerald-600 transition-colors">
                   {member.email}
                 </a>
               </li>
@@ -115,10 +104,7 @@ export default function StaffCards() {
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </span>
-                <a
-                  href={`tel:${member.mobile}`}
-                  className="hover:text-emerald-600 transition-colors"
-                >
+                <a href={`tel:${member.mobile}`} className="hover:text-emerald-600 transition-colors">
                   {member.mobile}
                 </a>
               </li>

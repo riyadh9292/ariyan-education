@@ -7,6 +7,8 @@ import "react-quill-new/dist/quill.snow.css"
 import AdminResultUpload from "@/components/AdminResultUpload"
 import AdminStaffTable from "@/components/Adminstafftable"
 import AdminNotices from "@/components/AdminNotices"
+import AdminVideoGallery from "@/components/AdminVideoGallery"
+import AdminPhotoGallery from "@/components/AdminPhotoGallery"
 
 // ✅ React Quill must be dynamically imported — it breaks on SSR
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false })
@@ -48,8 +50,6 @@ export default function AdminPage() {
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null)
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
-  console.log(title,"title");
-  console.log(menu,"menu");
   
   
 
@@ -164,6 +164,8 @@ export default function AdminPage() {
        pageSlug === "results"
         ? <AdminResultUpload /> :
         pageSlug === "staff" ? <AdminStaffTable /> :
+        pageSlug === "academic-photos" ? <AdminPhotoGallery /> :
+        pageSlug === "academic-videos" ? <AdminVideoGallery /> :
         (<div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
         {loading ? (

@@ -1,28 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import fs from "fs"
-import path from "path"
+import { connectDB } from "@/lib/mongodb"
 
-export function getMenu() {
-  const filePath = path.join(process.cwd(), "data/menu.json")
-  const data = fs.readFileSync(filePath, "utf-8")
-  return JSON.parse(data)
+export async function getMenu() {
+  const { db } = await connectDB()
+  const doc = await db.collection("site_menu").findOne({ key: "menu" })
+  return (doc?.value as any[]) ?? []
 }
 
-export function getAllSlugs() {
-
-  const menu = getMenu()
+export async function getAllSlugs() {
+  const menu = await getMenu()
   const slugs: string[] = []
 
   menu.forEach((item: any) => {
-
     slugs.push(item.slug)
-
-    if (item.submenu?.length) {
-      item.submenu.forEach((sub: any) => {
-        slugs.push(sub.slug)
-      })
-    }
-
+    item.submenu?.forEach((sub: any) => {
+      slugs.push(sub.slug)
+    })
   })
 
   return slugs

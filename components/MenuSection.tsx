@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link"
-import { readJson } from "@/lib/fileDb"
+import { getMenu } from "@/lib/menu"
 
-export default function Footer() {
-  const menu = readJson("menu.json")
+export default async function Footer() {
+  const menu = await getMenu()
   const year = new Date().getFullYear()
 
   return (

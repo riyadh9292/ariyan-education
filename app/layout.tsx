@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased text-[#000000]`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col mt-[80px]">
+      <body suppressHydrationWarning className="min-h-full flex flex-col mt-[68px]">
         <Navbar />
         {children}
         <MenuSection />

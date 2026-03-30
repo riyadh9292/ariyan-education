@@ -1,43 +1,83 @@
+"use client"
+import { useEffect, useState, useCallback } from "react"
+
+interface BannerImage { id: string; url: string; caption: string }
+
+const FALLBACK: BannerImage = {
+  id: "fallback",
+  url: "https://i.ibb.co.com/4Z8PpKZV/tim-mossholder-WE-Kv-ZB1l0-unsplash.jpg",
+  caption: "",
+}
+
 export default function Banner() {
+  const [images,  setImages]  = useState<BannerImage[]>([FALLBACK])
+  const [current, setCurrent] = useState(0)
+  const [fading,  setFading]  = useState(false)
+
+  useEffect(() => {
+    fetch("/api/banner")
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data) && data.length > 0) setImages(data) })
+      .catch(() => {})
+  }, [])
+
+  const goTo = useCallback((index: number) => {
+    setFading(true)
+    setTimeout(() => { setCurrent(index); setFading(false) }, 600)
+  }, [])
+
+  useEffect(() => {
+    if (images.length <= 1) return
+    const timer = setInterval(() => goTo((current + 1) % images.length), 5000)
+    return () => clearInterval(timer)
+  }, [current, images.length, goTo])
+
   return (
-    <section
-      className="relative text-white py-24 text-center overflow-hidden"
-      style={{
-        backgroundImage: "url('https://i.ibb.co.com/4Z8PpKZV/tim-mossholder-WE-Kv-ZB1l0-unsplash.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Dark overlay so text stays readable */}
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(15,27,45,0.82) 0%, rgba(30,58,95,0.75) 100%)" }} />
+    <section className="relative text-white overflow-hidden h-[400px]">
+
+      {/* Slides */}
+      {images.map((img, i) => (
+        <div key={img.id} className="absolute inset-0 transition-opacity duration-700"
+          style={{ opacity: i === current ? (fading ? 0 : 1) : 0, zIndex: i === current ? 1 : 0 }}>
+          <img src={img.url} alt={img.caption || "Banner"} className="w-full h-full object-cover" />
+        </div>
+      ))}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 z-10"
+        style={{ background: "linear-gradient(135deg, rgba(15,27,45,0.82) 0%, rgba(30,58,95,0.72) 100%)" }} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6">
-        {/* Logo mark */}
-        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-2xl"
-          style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-          </svg>
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-2xl"
+            style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">আরিয়ান এডুকেশন সেন্টার</h1>
+          <div className="w-20 h-1 mx-auto my-4 rounded-full"
+            style={{ background: "linear-gradient(90deg, #c9a84c, #f0c040)" }} />
+          <p className="text-lg font-medium" style={{ color: "#fde68a" }}>জ্ঞানের আলোয় আলোকিত ভবিষ্যৎ</p>
+          <p className="text-white/60 text-sm mt-2">Ariyan Education Center — Quality education for a better future</p>
+          {images[current]?.caption && (
+            <p className="mt-4 text-white/70 text-sm italic">{images[current].caption}</p>
+          )}
         </div>
-
-        <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">
-          আরিয়ান এডুকেশন সেন্টার
-        </h1>
-
-        <div className="w-20 h-1 mx-auto my-4 rounded-full"
-          style={{ background: "linear-gradient(90deg, #c9a84c, #f0c040)" }} />
-
-        <p className="text-lg opacity-90 font-medium" style={{ color: "#fde68a" }}>
-          জ্ঞানের আলোয় আলোকিত ভবিষ্যৎ
-        </p>
-
-        <p className="text-white/60 text-sm mt-2">
-          Ariyan Education Center — Quality education for a better future
-        </p>
       </div>
+
+      {/* Dots */}
+      {images.length > 1 && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+          {images.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)} className="rounded-full transition-all duration-300"
+              style={{ width: i === current ? "24px" : "8px", height: "8px",
+                background: i === current ? "linear-gradient(90deg,#c9a84c,#f0c040)" : "rgba(255,255,255,0.4)" }} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

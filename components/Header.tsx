@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { getMenu } from '@/lib/menu'
 import NavDropdown from '@/components/NavDropdown'
+import MobileNav from '@/components/Mobilenav'
 
 export default async function Header() {
   const menu = await getMenu()
@@ -11,65 +12,53 @@ export default async function Header() {
       className="fixed top-0 z-50 w-full shadow-lg"
       style={{ background: 'linear-gradient(135deg, #0f1b2d 0%, #1e3a5f 100%)' }}
     >
-      <nav className="w-full mx-auto flex items-center justify-center px-4">
+      <nav className="w-full flex items-center px-4">
 
-        {/* ── Logo ───────────────────────────────────────────────── */}
-        <Link
-          href="/"
-          className="flex items-center flex-shrink-0 transition-transform hover:scale-105 duration-300 pr-3"
-          style={{ borderRight: '1px solid rgba(255,255,255,0.12)' }}
-        >
-          <img
-            src="https://i.ibb.co.com/v4FC2GWy/788c07e9-a035-4984-b329-6f96b83456d2-removebg-preview.png"
-            alt="আরিয়ান এডুকেশন সেন্টার"
-            className="w-20 h-20 object-contain"
-          />
-        </Link>
 
-        {/* ── Home icon ──────────────────────────────────────────── */}
-        <Link
-          href="/"
-          className="flex items-center justify-center w-9 h-9 rounded-lg mx-3 flex-shrink-0 transition-all duration-200 hover:scale-110"
-          style={{
-            background: 'rgba(201,168,76,0.15)',
-            border: '1px solid rgba(201,168,76,0.3)',
-          }}
-          title="হোম"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="#c9a84c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </Link>
+        {/* ── Desktop: home icon + menu ── visible above 1200px ───── */}
+        <div className="hidden xl:flex items-center flex-1">
 
-        {/* ── Divider ────────────────────────────────────────────── */}
-        <span className="h-6 w-px flex-shrink-0"
-          style={{ background: 'rgba(255,255,255,0.12)' }} />
+          {/* Home icon */}
+          
 
-        {/* ── Menu ───────────────────────────────────────────────── */}
-        <div
-          className="flex items-center overflow-x-auto "
-          style={{ scrollbarWidth: 'none' }}
-        >
-          {menu.map((item: any, i: number) => (
-            <div key={i} className="flex items-center flex-shrink-0">
+          {/* Desktop menu */}
+          <div className="flex items-center justify-center flex-1 flex-wrap">
+            <Link
+            href="/"
+            className="flex items-center justify-center w-9 h-9 rounded-lg mx-3 flex-shrink-0 transition-all duration-200 hover:scale-110"
+            style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)' }}
+            title="হোম"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="#c9a84c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </Link>
 
-              {/* | separator between items */}
-              {i > 0 && (
-                <span className="h-4 w-px flex-shrink-0 mx-1"
-                  style={{ background: 'rgba(255,255,255,0.15)' }} />
-              )}
+          <span className="h-6 w-px flex-shrink-0" style={{ background: 'rgba(255,255,255,0.12)' }} />
+            {menu.map((item: any, i: number) => (
+              <div key={i} className="flex items-center flex-shrink-0">
+                {i > 0 && (
+                  <span className="h-4 w-px" style={{ background: 'rgba(255,255,255,0.15)' }} />
+                )}
+                <NavDropdown
+                  title={item.title}
+                  slug={item.slug}
+                  submenu={item.submenu ?? []}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
-              {/* ✅ Client component handles hover + dropdown reliably */}
-              <NavDropdown
-                title={item.title}
-                slug={item.slug}
-                submenu={item.submenu ?? []}
-              />
-
-            </div>
-          ))}
+        {/* ── Mobile: school name + hamburger ── hidden above 1200px ── */}
+        <div className="flex xl:hidden items-center flex-1 justify-between pl-4">
+          <div>
+            <div className="text-white font-bold text-sm leading-tight">আরিয়ান এডুকেশন</div>
+            <div className="text-xs font-medium" style={{ color: '#c9a84c' }}>সেন্টার</div>
+          </div>
+          <MobileNav menu={menu} />
         </div>
 
       </nav>

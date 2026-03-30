@@ -10,6 +10,7 @@ import AdminNotices from "@/components/AdminNotices"
 import AdminVideoGallery from "@/components/AdminVideoGallery"
 import AdminPhotoGallery from "@/components/AdminPhotoGallery"
 import AdminBannerUpload from "@/components/AdminBannerUpload"
+import AdminProfile from "@/components/AdminProfile"
 
 // ✅ React Quill must be dynamically imported — it breaks on SSR
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false })
@@ -40,6 +41,7 @@ const quillFormats = [
   "blockquote", "code-block",
   "link", "image",
 ]
+type Panel = "editor" | "banner" | "founder" | "principal"
 
 export default function AdminPage() {
   const [menu, setMenu] = useState<any[]>([])
@@ -52,6 +54,7 @@ export default function AdminPage() {
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [showBanner, setShowBanner] = useState(false)
+  const [panel, setPanel]         = useState<Panel>("editor")
   
 
   useEffect(() => { setMounted(true) }, [])
@@ -106,6 +109,13 @@ export default function AdminPage() {
     setTimeout(() => setMessage(null), 3000)
   }
 
+  const btnClass = (p: Panel) =>
+    `flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+      panel === p
+        ? "bg-gray-900 text-white"
+        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+    }`
+
   if (!mounted) return null
 
   console.log(parentSlug,"parentSlug");
@@ -113,8 +123,24 @@ export default function AdminPage() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between gap-10">
         <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
+        <button onClick={() => setPanel(p => p === "founder" ? "editor" : "founder")} className={btnClass("founder")}>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            প্রতিষ্ঠাতা
+          </button>
+ 
+          {/* অধ্যক্ষ */}
+          <button onClick={() => setPanel(p => p === "principal" ? "editor" : "principal")} className={btnClass("principal")}>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            অধ্যক্ষ
+          </button>
  
         <button
           onClick={() => setShowBanner((v) => !v)}
@@ -131,7 +157,9 @@ export default function AdminPage() {
           {showBanner ? "← পেজ এডিটরে ফিরুন" : "ব্যানার ছবি"}
         </button>
       </div>
-      {showBanner ? (
+      { panel === "founder" ? <AdminProfile type="founder"   label="প্রতিষ্ঠাতা" /> :
+      panel === "principal" ? <AdminProfile type="principal" label="অধ্যক্ষ" /> 
+      : showBanner ? (
         <AdminBannerUpload />
       ) : (
         <div className="p-6 max-w-4xl mx-auto">

@@ -4,6 +4,7 @@ import ResultTable from "@/components/ResultTable"
 import StaffCards from "@/components/Staffcards"
 import PhotoGallery from "@/components/PhotoGallery"
 import VideoGallery from "@/components/VideoGallery"
+import ContactPage from "./ContactPage"
 
 interface Props {
   slug        : string
@@ -30,7 +31,7 @@ export default function PageContent({ slug, defaultTitle }: Props) {
   const isSpecialPage = ["results", "staff", "academic-photos", "academic-videos"].includes(slug)
 
   return (
-    <div className="max-w-5xl mx-auto py-16 px-6">
+    <div className="w-[80vw] mx-auto py-16 px-6">
       <h1 className="text-3xl font-bold mb-6">{title}</h1>
 
       {loading && !isSpecialPage ? (
@@ -50,7 +51,9 @@ export default function PageContent({ slug, defaultTitle }: Props) {
         <PhotoGallery />
       ) : slug === "academic-videos" ? (
         <VideoGallery />
-      ) : content ? (
+      ) : slug === "contact" ? (
+        <ContactPage content={content} />
+      ): content ? (
         <div
           className="quill-content text-gray-700 leading-7"
           dangerouslySetInnerHTML={{ __html: content }}

@@ -60,7 +60,7 @@ export default async function Footer() {
                   className="w-full h-40 rounded-xl overflow-hidden border"
                   style={{ borderColor: "rgba(255,255,255,0.08)" }}
                 >
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d130495.18488182833!2d89.8741244!3d24.2593849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fdfbc20f052825%3A0x6b2a56b91ca498e8!2sSP%20Park!5e1!3m2!1sen!2sbd!4v1774893703499!5m2!1sen!2sbd" width="600" height="450" style={{ border: "0" }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32625.41018631367!2d89.88921980156044!3d24.253094441214433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fdfb00689d8f87%3A0x3fd0a156948a89bf!2sAriyan%20Skilled%20Academy!5e1!3m2!1sen!2sbd!4v1774929422541!5m2!1sen!2sbd" width="600" height="450" style={{ border: "0" }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>
               </div>
 

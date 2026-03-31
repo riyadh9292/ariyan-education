@@ -18,7 +18,7 @@ async function getAllNotices() {
       fileId  : n.fileId.toString(),        // ✅ needed for API URL
       title   : n.title,
       filename: n.originalName || n.filename,
-      date    : n.date || n.uploadedAt,
+      createdAt: n.createdAt || n.uploadedAt,
     }))
   } catch (err) {
     console.error("Failed to fetch notices:", err)
@@ -30,7 +30,7 @@ export default async function NoticesPage() {
   const notices = await getAllNotices()
 
   return (
-    <div className="w-full py-12 px-6">
+    <div className="w-[80vw] mx-auto py-16 px-6">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold text-gray-800">সকল নোটিশ</h1>
         <Link href="/" className="text-sm text-blue-600 hover:underline flex items-center gap-1">
@@ -72,7 +72,7 @@ export default async function NoticesPage() {
                   <td className="px-5 py-3.5">
                     {/* ✅ opens the notice viewer page */}
                     <Link
-                      href={`/notices/${notice.fileId}`}
+                      href={`/notice/${notice.fileId}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-2 group"
@@ -84,7 +84,7 @@ export default async function NoticesPage() {
                     </Link>
                   </td>
                   <td className="px-5 py-3.5 text-gray-500 text-xs">
-                    {new Date(notice.date).toLocaleDateString("bn-BD", {
+                    {new Date(notice.createdAt).toLocaleDateString("bn-BD", {
                       year: "numeric", month: "long", day: "numeric",
                     })}
                   </td>

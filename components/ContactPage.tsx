@@ -2,6 +2,7 @@
 
 interface Props {
   content: string  // HTML from Quill / raw text stored in MongoDB
+  title : string  // Optional title for the contact page
 }
 
 // Parse plain-text lines like "ফোন: 01XXXXXXX" into structured rows
@@ -55,7 +56,7 @@ function iconFor(line: string) {
   )
 }
 
-export default function ContactPage({ content }: Props) {
+export default function ContactPage({ content, title }: Props) {
   const lines = parseContactLines(content)
   const isRichHtml = /<(p|ul|ol|h[1-6]|strong|em|br)\b/i.test(content)
 
@@ -90,7 +91,7 @@ export default function ContactPage({ content }: Props) {
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white leading-tight">যোগাযোগের ঠিকানা</h2>
+              <h2 className="text-xl font-bold text-white leading-tight">{title}</h2>
               <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>আমাদের সাথে যোগাযোগ করুন</p>
             </div>
           </div>

@@ -5,6 +5,7 @@ import StaffCards from "@/components/Staffcards"
 import PhotoGallery from "@/components/PhotoGallery"
 import VideoGallery from "@/components/VideoGallery"
 import ContactPage from "./ContactPage"
+import PageWrapper from "./PageWrapper"
 
 interface Props {
   slug        : string
@@ -32,7 +33,7 @@ export default function PageContent({ slug, defaultTitle }: Props) {
 
   return (
     <div className="w-[80vw] mx-auto py-16 px-6">
-      <h1 className="text-3xl font-bold mb-6">{title}</h1>
+      {/* <h1 className="text-3xl font-bold mb-6">{title}</h1> */}
 
       {loading && !isSpecialPage ? (
         // Skeleton loader while fetching
@@ -52,12 +53,18 @@ export default function PageContent({ slug, defaultTitle }: Props) {
       ) : slug === "academic-videos" ? (
         <VideoGallery />
       ) : slug === "contact" ? (
-        <ContactPage content={content} />
+        <ContactPage content={content} title={title} />
       ): content ? (
+        <PageWrapper
+          title={title}
+          subtitle="প্রকাশিত ফলাফল সমূহ"
+          // icon={resultsIcon}
+        >
         <div
           className="quill-content text-gray-700 leading-7"
           dangerouslySetInnerHTML={{ __html: content }}
         />
+      </PageWrapper>
       ) : (
         <p className="text-gray-400">এই পেজের কনটেন্ট শীঘ্রই যুক্ত করা হবে।</p>
       )}

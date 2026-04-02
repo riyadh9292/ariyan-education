@@ -53,13 +53,13 @@ export default function MobileNav({ menu }: Props) {
           style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="flex items-center gap-2">
             <img
-              src="https://i.ibb.co.com/v4FC2GWy/788c07e9-a035-4984-b329-6f96b83456d2-removebg-preview.png"
+              src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png"
               alt="Ariyan Education"
-              className="w-10 h-10 object-contain"
+              className="w-20 h-20 object-contain scale-150"
             />
             <div>
-              <div className="text-white text-sm font-bold leading-tight">আরিয়ান এডুকেশন</div>
-              <div className="text-xs font-medium" style={{ color: '#c9a84c' }}>সেন্টার</div>
+              <div className="text-white text-sm font-bold leading-tight">আরিয়ান স্কিলড</div>
+              <div className="text-xs font-medium" style={{ color: '#c9a84c' }}>একাডেমি</div>
             </div>
           </div>
           <button
@@ -142,7 +142,7 @@ export default function MobileNav({ menu }: Props) {
         {/* Footer */}
         <div className="px-5 py-4 text-xs text-center"
           style={{ color: 'rgba(255,255,255,0.25)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          © {new Date().getFullYear()} আরিয়ান এডুকেশন সেন্টার
+          © {new Date().getFullYear()} আরিয়ান স্কিলড একাডেমি
         </div>
       </div>
     </>

@@ -53,11 +53,12 @@ export default async function Header() {
         </div>
 
         {/* ── Mobile: school name + hamburger ── hidden above 1200px ── */}
-        <div className="flex xl:hidden items-center flex-1 justify-between pl-4">
-          <div>
-            <div className="text-white font-bold text-sm leading-tight">আরিয়ান এডুকেশন</div>
-            <div className="text-xs font-medium" style={{ color: '#c9a84c' }}>সেন্টার</div>
-          </div>
+        <div className="flex xl:hidden items-center flex-1 justify-between">
+          <img
+    src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png"
+    alt="আরিয়ান এডুকেশন সেন্টার"
+    className="h-14 w-auto object-contain"
+  />
           <MobileNav menu={menu} />
         </div>
 

@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState, useCallback } from "react"
+import Image from "next/image"
 
 interface BannerImage { id: string; url: string; caption: string }
 
@@ -33,7 +34,7 @@ export default function Banner() {
   }, [current, images.length, goTo])
 
   return (
-    <section className="relative text-white overflow-hidden h-[400px]">
+    <section className="relative text-white overflow-hidden h-[450px] xl:h-[400px]">
 
       {/* Slides */}
       {images.map((img, i) => (
@@ -50,18 +51,19 @@ export default function Banner() {
       {/* Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-2xl"
-            style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-            </svg>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">আরিয়ান এডুকেশন সেন্টার</h1>
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-2xl"
+  style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
+    <img src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png" alt="Whats App Image 2026 03 30 at 09 27 46 removebg preview" className="w-full h-full object-contain scale-[175%]" />
+  {/* <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+  </svg> */}
+</div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">আরিয়ান স্কিলড একাডেমি</h1>
           <div className="w-20 h-1 mx-auto my-4 rounded-full"
             style={{ background: "linear-gradient(90deg, #c9a84c, #f0c040)" }} />
-          <p className="text-lg font-medium" style={{ color: "#fde68a" }}>জ্ঞানের আলোয় আলোকিত ভবিষ্যৎ</p>
-          <p className="text-white/60 text-sm mt-2">Ariyan Education Center — Quality education for a better future</p>
+          <p className="text-lg font-medium" style={{ color: "#fde68a" }}>মূল লক্ষ্য হলো যুবক ও তরুণীদের আধুনিক কর্মমুখী শিক্ষায় শিক্ষিত করে তোলা।</p>
+          <p className="text-white/60 text-sm mt-2 font-bold">Ariyan Skilled Academy — Quality training for a better future</p>
           {images[current]?.caption && (
             <p className="mt-4 text-white/70 text-sm italic">{images[current].caption}</p>
           )}

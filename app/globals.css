@@ -34,3 +34,20 @@ button, a {
   word-break: break-word;
   overflow-wrap: anywhere;
 }
+
+:root {
+  --font-english: var(--font-montserrat);
+  --font-bangla: var(--font-bengali);
+}
+
+.font-english {
+  font-family: var(--font-english);
+}
+
+.font-bangla {
+  font-family: var(--font-bangla);
+}
+
+body {
+  font-family: var(--font-bangla);
+}

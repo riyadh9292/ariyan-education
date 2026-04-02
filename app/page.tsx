@@ -20,20 +20,21 @@ export default function Home() {
           {/* Logo / icon */}
           <div className="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center shadow-2xl"
             style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round">
+              <img src="https://i.ibb.co.com/fB86vmL/Whats-App-Image-2026-03-30-at-09-27-46-1-removebg-preview.png" alt="Whats App Image 2026 03 30 at 09 27 46 1 removebg preview" className="w-full h-full object-contain scale-[125%]" />
+            {/* <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
               <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-            </svg>
+            </svg> */}
           </div>
 
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 leading-tight">
-            আরিয়ান এডুকেশন সেন্টার
+            আরিয়ান চাইল্ড এন্ড ওল্ড কেয়ার
           </h1>
           <p className="text-yellow-300 text-lg font-medium mb-2">
-            জ্ঞানের আলোয় আলোকিত ভবিষ্যৎ
+            বিশেষায়িত সেবা প্রদানকারী প্রতিষ্ঠান
           </p>
           <p className="text-gray-400 text-sm">
-            মানসম্পন্ন শিক্ষার একটি বিশ্বস্ত প্রতিষ্ঠান
+            বাড়িতে বসে উন্নত মানের স্বাস্থ্যসেবা বা দেখাশোনা পেতে চান, তাদের জন্য এটি কাজ করে। <br /> আমাদের পেশাদার এবং সহানুভূতিশীল কর্মীরা আপনার প্রিয়জনের যত্ন নেওয়ার জন্য সর্বদা প্রস্তুত।
           </p>
         </div>
 

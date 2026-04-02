@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import MenuSection from "@/components/MenuSection";
+
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300","400","500","600","700"],
+  variable: "--font-montserrat"
+});
+const hindSiliguri = Hind_Siliguri({
+  subsets: ["bengali"],
+  variable: "--font-bengali",
+  weight: ["400","500","600","700"]
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +39,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased text-[#000000]`}
+      className={`${montserrat.variable} ${hindSiliguri.variable} h-full antialiased text-[#000000]`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col mt-[36px] xl:mt-[68px]">
+      <body suppressHydrationWarning className="min-h-full flex flex-col mt-[36px] xl:mt-[55px]">
         <Navbar />
         {children}
         <MenuSection />

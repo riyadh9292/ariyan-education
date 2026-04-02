@@ -240,7 +240,7 @@ export default function AdminResultUpload() {
             <p>এখনো কোনো ফলাফল আপলোড করা হয়নি।</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className=" w-75 sm:w-fit overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-100">

@@ -32,7 +32,7 @@ export default function PageContent({ slug, defaultTitle }: Props) {
   const isSpecialPage = ["results", "staff", "academic-photos", "academic-videos"].includes(slug)
 
   return (
-    <div className="w-[80vw] mx-auto py-16 px-6">
+    <div className="w-[96%] sm:w-[80vw] mx-auto py-16 px-6">
       {/* <h1 className="text-3xl font-bold mb-6">{title}</h1> */}
 
       {loading && !isSpecialPage ? (
@@ -61,7 +61,8 @@ export default function PageContent({ slug, defaultTitle }: Props) {
           // icon={resultsIcon}
         >
         <div
-          className="quill-content text-gray-700 leading-7"
+          className="quill-content text-gray-700 leading-7 break-words overflow-wrap-anywhere"
+          style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </PageWrapper>

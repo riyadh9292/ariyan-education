@@ -123,45 +123,80 @@ export default function AdminPage() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between gap-10">
-        <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
-        <button onClick={() => setPanel(p => p === "founder" ? "editor" : "founder")} className={btnClass("founder")}>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            প্রতিষ্ঠাতা
-          </button>
- 
-          {/* অধ্যক্ষ */}
-          <button onClick={() => setPanel(p => p === "principal" ? "editor" : "principal")} className={btnClass("principal")}>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            অধ্যক্ষ
-          </button>
- 
+      {/* ── Header with all buttons ─────────────────────────────── */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-3 flex-wrap">
+        <h1 className="text-2xl font-bold text-gray-800 mr-auto">Admin Panel</h1>
+
+        {/* প্রতিষ্ঠাতা */}
         <button
-          onClick={() => setShowBanner((v) => !v)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
-            ${showBanner
-              ? "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-              : "bg-indigo-600 text-white hover:bg-indigo-700"
+          onClick={() => setPanel(p => p === "founder" ? "editor" : "founder")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all
+            ${panel === "founder"
+              ? "text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
+          style={panel === "founder" ? { background: "linear-gradient(135deg, #7c3aed, #6d28d9)" } : {}}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
-          {showBanner ? "← পেজ এডিটরে ফিরুন" : "ব্যানার ছবি"}
+          প্রতিষ্ঠাতা
+          {panel === "founder" && <span className="w-1.5 h-1.5 rounded-full bg-white ml-1" />}
         </button>
+
+        {/* অধ্যক্ষ */}
+        <button
+          onClick={() => setPanel(p => p === "principal" ? "editor" : "principal")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all
+            ${panel === "principal"
+              ? "text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          style={panel === "principal" ? { background: "linear-gradient(135deg, #059669, #047857)" } : {}}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          অধ্যক্ষ
+          {panel === "principal" && <span className="w-1.5 h-1.5 rounded-full bg-white ml-1" />}
+        </button>
+
+        {/* ব্যানার ছবি */}
+        <button
+          onClick={() => setPanel(p => p === "banner" ? "editor" : "banner")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all
+            ${panel === "banner"
+              ? "text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          style={panel === "banner" ? { background: "linear-gradient(135deg, #d97706, #b45309)" } : {}}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          ব্যানার ছবি
+          {panel === "banner" && <span className="w-1.5 h-1.5 rounded-full bg-white ml-1" />}
+        </button>
+
+        {/* Back to editor — shown only when a special panel is active */}
+        {panel !== "editor" && (
+          <button
+            onClick={() => setPanel("editor")}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-white hover:bg-gray-900 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            পেজ এডিটর
+          </button>
+        )}
       </div>
       { panel === "founder" ? <AdminProfile type="founder"   label="প্রতিষ্ঠাতা" /> :
-      panel === "principal" ? <AdminProfile type="principal" label="অধ্যক্ষ" /> 
-      : showBanner ? (
-        <AdminBannerUpload />
-      ) : (
+      panel === "principal" ? <AdminProfile type="principal" label="অধ্যক্ষ" /> :
+      panel === "banner"    ? <AdminBannerUpload /> : (
         <div className="p-6 max-w-4xl mx-auto">
 
       {/* Page selector */}
@@ -243,7 +278,7 @@ export default function AdminPage() {
       <button
         onClick={handleSave}
         disabled={!pageSlug}
-        className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+        className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-40 disabled:cursor-not-allowed mt-20"
       >
         Save Changes
       </button>

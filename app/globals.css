@@ -22,3 +22,15 @@ body {
 button, a {
   cursor: pointer !important;
 }
+
+.quill-content {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.quill-content p,
+.quill-content span,
+.quill-content li {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

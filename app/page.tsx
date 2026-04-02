@@ -62,14 +62,11 @@ export default function Home() {
       </div>
 
       {/* ── Notice board ─────────────────────────────────────────────── */}
-      <div className="grid grid-cols-7 gap-4 " style={{
-    width: "80%",
-    margin: "0 auto",
-}}>
-        <div className="col-span-5">
+      <div className="grid xl:grid-cols-7 gap-4 w-[96%] sm:w-[80%] mx-auto">
+        <div className="xl:col-span-5">
           <NoticeBoard />
         </div>
-        <div className="col-span-2">
+        <div className="xl:col-span-2">
           <ProfileSection />
         </div>
 

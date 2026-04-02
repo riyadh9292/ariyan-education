@@ -33,7 +33,7 @@ export default function ProfileSection() {
   ]
 
   return (
-    <section className="w-full max-w-5xl mx-auto px-4 py-16">
+    <section className="w-full max-w-5xl mx-auto px-4 xl:pt-16 pb-16 ">
 
       {/* ── Outer card — identical to NoticeBoard ────────────────── */}
       <div
@@ -90,7 +90,7 @@ export default function ProfileSection() {
                 ))}
               </div>
             ) : (
-              <ul className="divide-y divide-gray-50">
+              <ul className="grid grid-cols-2 xl:grid-cols-1 justify-center divide-y divide-gray-50">
                 {profiles.map((p) => {
                   if (!p.data) return null
                   return (

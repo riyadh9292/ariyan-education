@@ -23,7 +23,7 @@ export default async function ProfilePage({
   }
 
   const isFounder  = type === "founder"
-  const titleBn    = isFounder ? "প্রতিষ্ঠাতা" : "অধ্যক্ষ"
+  const titleBn    = isFounder ? "চেয়ারম্যান" : "ব্যবস্থাপনা পরিচালক"
   const badgeStyle = isFounder
     ? { background: "#fef3c7", color: "#92400e" }
     : { background: "#eff6ff", color: "#1d4ed8" }

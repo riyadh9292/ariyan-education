@@ -28,8 +28,8 @@ export default function ProfileSection() {
   }, [])
 
   const profiles = [
-    { title: "প্রতিষ্ঠাতা", titleEn: "Founder",   data: founder,   slug: "founder",   index: 0 },
-    { title: "অধ্যক্ষ",    titleEn: "Principal",  data: principal, slug: "principal", index: 1 },
+    { title: "চেয়ারম্যান", titleEn: "Founder",   data: founder,   slug: "founder",   index: 0 },
+    { title: "ব্যবস্থাপনা পরিচালক",    titleEn: "Principal",  data: principal, slug: "principal", index: 1 },
   ]
 
   return (
@@ -68,7 +68,7 @@ export default function ProfileSection() {
             <div>
               <h2 className="text-xl font-bold text-white leading-tight">প্রশাসনিক পরিচিতি</h2>
               <p className="text-xs leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
-                প্রতিষ্ঠাতা ও অধ্যক্ষ
+                চেয়ারম্যান ও ব্যবস্থাপনা পরিচালক
               </p>
             </div>
           </div>

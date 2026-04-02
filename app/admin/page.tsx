@@ -141,7 +141,7 @@ export default function AdminPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
-          প্রতিষ্ঠাতা
+          চেয়ারম্যান
           {panel === "founder" && <span className="w-1.5 h-1.5 rounded-full bg-white ml-1" />}
         </button>
 
@@ -159,7 +159,7 @@ export default function AdminPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
-          অধ্যক্ষ
+          ব্যবস্থাপনা পরিচালক
           {panel === "principal" && <span className="w-1.5 h-1.5 rounded-full bg-white ml-1" />}
         </button>
 
@@ -194,8 +194,8 @@ export default function AdminPage() {
           </button>
         )}
       </div>
-      { panel === "founder" ? <AdminProfile type="founder"   label="প্রতিষ্ঠাতা" /> :
-      panel === "principal" ? <AdminProfile type="principal" label="অধ্যক্ষ" /> :
+      { panel === "founder" ? <AdminProfile type="founder"   label="চেয়ারম্যান" /> :
+      panel === "principal" ? <AdminProfile type="principal" label="ব্যবস্থাপনা পরিচালক" /> :
       panel === "banner"    ? <AdminBannerUpload /> : (
         <div className="p-6 max-w-4xl mx-auto">
 

@@ -14,8 +14,8 @@
     "title": "প্রশাসনিক তথ্য",
     "slug": "administration",
     "submenu": [
-      { "title": "প্রতিষ্ঠাতা", "slug": "founder" },
-      { "title": "অধ্যক্ষের পরিচিতি", "slug": "principal" },
+      { "title": "চেয়ারম্যান", "slug": "founder" },
+      { "title": "ব্যবস্থাপনা পরিচালক", "slug": "principal" },
       { "title": "অধ্যক্ষ", "slug": "head" }
     ]
   },

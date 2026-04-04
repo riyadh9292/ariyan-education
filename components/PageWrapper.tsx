@@ -64,7 +64,7 @@ export default function PageWrapper({ title, subtitle, icon, children, aside }: 
             <div>
               <h2 className="text-xl font-bold text-white leading-tight">{title}</h2>
               {subtitle && (
-                <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
                   {subtitle}
                 </p>
               )}

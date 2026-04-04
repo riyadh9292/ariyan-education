@@ -134,7 +134,7 @@ export default async function ProfilePage({
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white leading-tight">বিবরণ</h2>
-                <p className="text-xs leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
                   {titleBn}র বিস্তারিত তথ্য
                 </p>
               </div>

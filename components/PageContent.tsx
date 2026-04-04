@@ -6,6 +6,7 @@ import PhotoGallery from "@/components/PhotoGallery"
 import VideoGallery from "@/components/VideoGallery"
 import ContactPage from "./ContactPage"
 import PageWrapper from "./PageWrapper"
+import CoursesSection from "./CoursesSection"
 
 interface Props {
   slug        : string
@@ -54,10 +55,13 @@ export default function PageContent({ slug, defaultTitle }: Props) {
         <VideoGallery />
       ) : slug === "contact" ? (
         <ContactPage content={content} title={title} />
+      ):slug === "courses" ? (
+        <CoursesSection />
       ): content ? (
         <PageWrapper
           title={title}
-          subtitle="প্রকাশিত ফলাফল সমূহ"
+          subtitle=""
+          // subtitle="প্রকাশিত কনটেন্ট সমূহ"
           // icon={resultsIcon}
         >
         <div

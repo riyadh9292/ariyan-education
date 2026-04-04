@@ -17,7 +17,7 @@ export default function NoticeBoard() {
   useEffect(() => {
     fetch("/api/notices?limit=5")
       .then(r => r.json())
-      .then(data => setNotices(Array.isArray(data) ? data : []))
+      .then(data => setNotices(Array.isArray(data) ? data.reverse() : []))
       .catch(() => setNotices([]))
       .finally(() => setLoading(false))
   }, [])
@@ -65,7 +65,7 @@ export default function NoticeBoard() {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white leading-tight">নোটিশ বোর্ড</h2>
-                <p className="text-xs leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
                   সর্বশেষ বিজ্ঞপ্তিসমূহ
                 </p>
               </div>
@@ -137,14 +137,15 @@ export default function NoticeBoard() {
 
                       {/* Text */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors leading-snug truncate">
+                        <p className="text-lg font-semibold text-gray-800 group-hover:text-blue-700 transition-colors leading-snug truncate">
+                          {n.title}
                           {i === 0 && (
                             <span className="inline-block text-[9px] font-bold px-1.5 py-0.5 rounded mr-1.5 align-middle"
                               style={{ background: "#fef3c7", color: "#92400e" }}>
                               নতুন
                             </span>
                           )}
-                          {n.title}
+                  
                         </p>
                         <div className="flex items-center gap-1.5 mt-1">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round">

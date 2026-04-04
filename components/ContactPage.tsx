@@ -92,7 +92,7 @@ export default function ContactPage({ content, title }: Props) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white leading-tight">{title}</h2>
-              <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>আমাদের সাথে যোগাযোগ করুন</p>
+              <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>আমাদের সাথে যোগাযোগ করুন</p>
             </div>
           </div>
 

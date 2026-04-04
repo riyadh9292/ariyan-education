@@ -67,7 +67,7 @@ export default function ProfileSection() {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white leading-tight">প্রশাসনিক পরিচিতি</h2>
-              <p className="text-xs leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <p className="text-sm leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
                 চেয়ারম্যান ও ব্যবস্থাপনা পরিচালক
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function ProfileSection() {
                   if (!p.data) return null
                   return (
                     <li key={p.slug}>
-                      <span className="inline-block text-[9px] font-bold px-1.5 py-0.5 rounded self-start uppercase tracking-wider"
+                      <span className="inline-block text-xs font-bold px-1.5 py-0.5 rounded self-start uppercase tracking-wider"
                             style={p.index === 0
                               ? { background: "#fef3c7", color: "#92400e" }
                               : { background: "#eff6ff", color: "#1d4ed8" }}>
@@ -107,7 +107,7 @@ export default function ProfileSection() {
                       >
                         {/* Photo */}
                         <div className="relative flex-shrink-0">
-                          <div className="w-28 h-28 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-110"
+                          <div className="w-52 h-52 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110"
                             style={{ outline: `3px solid ${p.index === 0 ? "#c9a84c" : "#1e3a5f"}`, outlineOffset: "2px" }}>
                             {p.data.photo ? (
                               <img src={p.data.photo} alt={p.data.name} className="w-full h-full object-cover" />
@@ -119,24 +119,21 @@ export default function ProfileSection() {
                             )}
                           </div>
                           {/* Index badge */}
-                          <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white border-2 border-white"
+                          {/* <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white border-2 border-white"
                             style={{ background: p.index === 0 ? "linear-gradient(135deg,#c9a84c,#f0c040)" : "linear-gradient(135deg,#1e3a5f,#2563eb)", color: p.index === 0 ? "#7a4a00" : "white" }}>
                             {p.index + 1}
-                          </span>
+                          </span> */}
                         </div>
 
                         {/* Title → name → description — vertical col */}
                         <div className="flex-1 min-w-0 flex flex-col gap-0.5 justify-center items-center">
                     
                           {/* Name */}
-                          <p className="text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors leading-snug truncate">
+                          <p className="text-xl font-bold text-black group-hover:text-blue-700 transition-colors leading-snug truncate">
                             {p.data.name}
                           </p>
-                          {/* Description — strip HTML */}
                           {p.data.description && (
-                            <p className="text-xs text-gray-400 line-clamp-1">
-                              {p.data.description.replace(/<[^>]*>/g, " ").substring(0, 80)}
-                            </p>
+                            <p className="text-xs text-[#0f1b2d] line-clamp-2 text-center" dangerouslySetInnerHTML={{ __html: p.data.description }} />
                           )}
                         </div>
 

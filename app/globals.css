@@ -51,3 +51,7 @@ button, a {
 body {
   font-family: var(--font-bangla);
 }
+
+.ql-size-large{
+  font-size: 20px;
+}

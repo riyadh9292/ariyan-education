@@ -97,7 +97,7 @@ export default function StaffCards() {
                   <div className="flex justify-center mb-5">
                     <div className="relative">
                       <div
-                        className="w-24 h-24 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105"
+                        className="w-24 h-24 rounded-md overflow-hidden transition-transform duration-300 group-hover:scale-105"
                         style={{
                           outline      : "3px solid rgba(201,168,76,0.5)",
                           outlineOffset: "3px",
@@ -128,14 +128,30 @@ export default function StaffCards() {
                     <ul className="divide-y divide-gray-50">
 
                       <li className="flex items-start gap-3 px-4 py-3 hover:bg-blue-50/60 transition-colors">
-                        <span className="mt-0.5 shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
-                          style={{ background: "linear-gradient(135deg, #0f1b2d, #1e3a5f)" }}>
-                          <svg className="w-3.5 h-3.5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                          </svg>
-                        </span>
+                        <span
+  className="mt-0.5 shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
+  style={{ background: "linear-gradient(135deg, #0f1b2d, #1e3a5f)" }}
+>
+  <svg
+    className="w-3.5 h-3.5 text-yellow-300"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M16 7V5a2 2 0 00-2-2H10a2 2 0 00-2 2v2M4 7h16v14H4V7z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M16 11H8v4h8v-4z"
+    />
+  </svg>
+</span>
                         <span className="text-sm text-gray-600 leading-snug mt-1.5">{member.address}</span>
                       </li>
 

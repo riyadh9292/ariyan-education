@@ -29,10 +29,15 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "আরিয়ান স্কিলড একাডেমি",
   description: "তরুণ প্রজন্মের আধুনিক কর্মমুখী শিক্ষা নিশ্চিতকরণে নিবেদিত একটি প্রতিষ্ঠান।",
+  icons: {
+    icon: "/https://ariyanskilledacademy.com/vercel.svg",        // default favicon
+    shortcut: "/https://ariyanskilledacademy.com/vercel.svg",    // shortcut icon (Windows)
+    apple: "/https://ariyanskilledacademy.com/vercel.svg",       // iOS Safari
+  },
   openGraph: {
     title: "আরিয়ান স্কিলড একাডেমি",
     description: "আপনার উন্নতি আমাদের অগ্রাধিকার",
-    url: "https://ariyanskilledacademy.com/",
+    url: "https://ariyanskilledacademy.com",
     siteName: "আরিয়ান স্কিলড একাডেমি",
     images: [
       {

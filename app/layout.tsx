@@ -30,9 +30,9 @@ export const metadata = {
   title: "আরিয়ান স্কিলড একাডেমি",
   description: "তরুণ প্রজন্মের আধুনিক কর্মমুখী শিক্ষা নিশ্চিতকরণে নিবেদিত একটি প্রতিষ্ঠান।",
   icons: {
-    icon: "/https://ariyanskilledacademy.com/vercel.svg",        // default favicon
-    shortcut: "/https://ariyanskilledacademy.com/vercel.svg",    // shortcut icon (Windows)
-    apple: "/https://ariyanskilledacademy.com/vercel.svg",       // iOS Safari
+    icon: "https://ariyanskilledacademy.com/vercel.svg",        // default favicon
+    shortcut: "https://ariyanskilledacademy.com/vercel.svg",    // shortcut icon (Windows)
+    apple: "https://ariyanskilledacademy.com/vercel.svg",       // iOS Safari
   },
   openGraph: {
     title: "আরিয়ান স্কিলড একাডেমি",

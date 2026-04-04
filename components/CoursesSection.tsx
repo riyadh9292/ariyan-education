@@ -94,7 +94,7 @@ export default function CoursesSection() {
   return (
     <PageWrapper
       title="আমাদের কোর্সসমূহ"
-      subtitle={`মোট ${courses.length}টি কোর্স উপলব্ধ`}
+      subtitle={`মোট ${courses.length}টি কোর্সের বিস্তারিত তথ্য`}
       icon={coursesIcon}
     >
       <div className="-mx-5 -mb-6 -mt-1">

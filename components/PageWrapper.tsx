@@ -77,10 +77,10 @@ export default function PageWrapper({ title, subtitle, icon, children, aside }: 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {/* Left — main content */}
               <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.97)" }}>
-                <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
+                {/* <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full" style={{ background: "#f0c040" }} />
                   <span className="text-sm font-semibold text-gray-700">{title}</span>
-                </div>
+                </div> */}
                 <div className="p-5">{children}</div>
               </div>
               {/* Right — aside (map, image etc.) */}
@@ -91,10 +91,10 @@ export default function PageWrapper({ title, subtitle, icon, children, aside }: 
           ) : (
             // Single-column — full width white card
             <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.97)" }}>
-              <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
+              {/* <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full" style={{ background: "#f0c040" }} />
                 <span className="text-sm font-semibold text-gray-700">{title}</span>
-              </div>
+              </div> */}
               <div className="p-5 sm:p-6">{children}</div>
             </div>
           )}

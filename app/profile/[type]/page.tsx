@@ -8,6 +8,7 @@ export default async function ProfilePage({
   const { type } = await params
   const { db }   = await connectDB()
   const doc      = await db.collection("site_profiles").findOne({ type })
+  
 
   if (!doc) {
     return (
@@ -135,17 +136,17 @@ export default async function ProfilePage({
               <div>
                 <h2 className="text-lg font-bold text-white leading-tight">বিবরণ</h2>
                 <p className="text-sm leading-none mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  {titleBn}র বিস্তারিত তথ্য
+                  {isFounder ? "চেয়ারম্যানের বাণী" : "ব্যবস্থাপনা পরিচালকের বাণী"}
                 </p>
               </div>
             </div>
 
             {/* Inner white card — same as NoticeBoard inner */}
             <div className="rounded-2xl overflow-hidden p-6" style={{ background: "rgba(255,255,255,0.97)" }}>
-              {doc.description ? (
+              {doc.bani ? (
                 <div
-                  className="quill-content text-gray-700 leading-8 text-[15px]"
-                  dangerouslySetInnerHTML={{ __html: doc.description }}
+                  className=" text-gray-700 leading-8 text-[15px]"
+                  dangerouslySetInnerHTML={{ __html: doc.bani }}
                 />
               ) : (
                 <p className="text-gray-400 italic text-center py-6">কোনো বিবরণ যুক্ত করা হয়নি।</p>

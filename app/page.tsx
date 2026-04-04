@@ -1,5 +1,6 @@
 // app/page.tsx — replace your entire homepage with this
 import NoticeBoard from "@/components/NoticeBoard"
+import OpportunityBanner from "@/components/OpportunityBanner"
 import ProfileSection from "@/components/ProfileSection"
 
 export default function Home() {
@@ -57,7 +58,10 @@ export default function Home() {
       {/* ── Notice board ─────────────────────────────────────────────── */}
       <div className="grid xl:grid-cols-7 gap-4 w-[96%] sm:w-[80%] mx-auto">
         <div className="xl:col-span-5">
-          <NoticeBoard />
+          <div className="">
+            <NoticeBoard />
+            <OpportunityBanner />
+          </div>        
         </div>
         <div className="xl:col-span-2">
           <ProfileSection />

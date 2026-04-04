@@ -2,30 +2,61 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import dynamic from "next/dynamic"
+import "react-quill-new/dist/quill.snow.css"
+
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false })
+
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, false] }],
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ color: [] }, { background: [] }],
+    [{ align: [] }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    ["blockquote", "code-block"],
+    ["link", "image"],
+    ["clean"],
+  ],
+}
+
+const quillFormats = [
+  "header", "font", "size",
+  "bold", "italic", "underline", "strike",
+  "color", "background",
+  "align", "list", "indent",
+  "blockquote", "code-block",
+  "link", "image",
+]
 
 interface Props {
-  type: "founder" | "principal"
-  label: string   // "প্রতিষ্ঠাতা" | "অধ্যক্ষ"
+  type : "founder" | "principal"
+  label: string
 }
 
 export default function AdminProfile({ type, label }: Props) {
-  const [name, setName]               = useState("")
+  const [name,        setName]        = useState("")
   const [description, setDescription] = useState("")
-  const [photo, setPhoto]             = useState("")
-  const [file, setFile]               = useState<File | null>(null)
-  const [preview, setPreview]         = useState<string | null>(null)
-  const [loading, setLoading]         = useState(true)
-  const [saving, setSaving]           = useState(false)
-  const [message, setMessage]         = useState<{ text: string; type: "success" | "error" } | null>(null)
+  const [bani,        setBani]        = useState("")   // ← new
+  const [photo,       setPhoto]       = useState("")
+  const [file,        setFile]        = useState<File | null>(null)
+  const [preview,     setPreview]     = useState<string | null>(null)
+  const [loading,     setLoading]     = useState(true)
+  const [saving,      setSaving]      = useState(false)
+  const [message,     setMessage]     = useState<{ text: string; type: "success" | "error" } | null>(null)
   const fileRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/profile?type=${type}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setName(data.name ?? "")
+      .then(r => r.json())
+      .then(data => {
+        setName(data.name               ?? "")
         setDescription(data.description ?? "")
-        setPhoto(data.photo ?? "")
+        setBani(data.bani               ?? "")   // ← new
+        setPhoto(data.photo             ?? "")
       })
       .catch(() => {})
       .finally(() => setLoading(false))
@@ -50,13 +81,14 @@ export default function AdminProfile({ type, label }: Props) {
     formData.append("type",        type)
     formData.append("name",        name)
     formData.append("description", description)
+    formData.append("bani",        bani)   // ← new
     if (file) formData.append("photo", file)
 
     try {
       const res  = await fetch("/api/admin/profile", { method: "POST", body: formData })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      if (preview) setPhoto(preview)   // optimistic UI update
+      if (preview) setPhoto(preview)
       setFile(null)
       setPreview(null)
       if (fileRef.current) fileRef.current.value = ""
@@ -90,15 +122,14 @@ export default function AdminProfile({ type, label }: Props) {
         </div>
         <div>
           <h2 className="text-lg font-bold text-gray-800">{label} পরিচিতি</h2>
-          <p className="text-xs text-gray-400">নাম, ছবি ও বিবরণ আপডেট করুন</p>
+          <p className="text-xs text-gray-400">নাম, ছবি, বিবরণ ও বাণী আপডেট করুন</p>
         </div>
       </div>
 
       <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
 
-        {/* Photo section */}
+        {/* Photo */}
         <div className="flex items-center gap-5">
-          {/* Avatar */}
           <div
             onClick={() => fileRef.current?.click()}
             className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-amber-100 bg-gray-100 cursor-pointer shrink-0 hover:opacity-90 transition-opacity"
@@ -106,13 +137,12 @@ export default function AdminProfile({ type, label }: Props) {
             {currentPhoto ? (
               <Image src={currentPhoto} alt={label} fill className="object-cover" sizes="96px" />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-amber-50 to-orange-50">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50">
                 <svg className="w-8 h-8 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
                 </svg>
               </div>
             )}
-            {/* camera overlay */}
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded-full">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -121,7 +151,6 @@ export default function AdminProfile({ type, label }: Props) {
               </svg>
             </div>
           </div>
-
           <div className="flex-1">
             <p className="text-sm font-medium text-gray-700 mb-1">ছবি</p>
             <p className="text-xs text-gray-400 mb-2">বৃত্তাকার ছবিতে ক্লিক করে পরিবর্তন করুন</p>
@@ -135,16 +164,17 @@ export default function AdminProfile({ type, label }: Props) {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-gray-100" />
 
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">নাম <span className="text-red-400">*</span></label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            নাম <span className="text-red-400">*</span>
+          </label>
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             placeholder={`${label}-এর পূর্ণ নাম লিখুন`}
             className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 transition-shadow"
           />
@@ -155,15 +185,34 @@ export default function AdminProfile({ type, label }: Props) {
           <label className="block text-sm font-medium text-gray-700 mb-1.5">বিবরণ</label>
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={5}
+            onChange={e => setDescription(e.target.value)}
+            rows={4}
             placeholder={`${label} সম্পর্কে বিস্তারিত লিখুন...`}
             className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 transition-shadow resize-none leading-relaxed"
           />
         </div>
 
-        {/* Save row */}
-        <div className="flex items-center gap-4 pt-1">
+        {/* Bani — rich text editor */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            বাণী
+            <span className="ml-2 text-xs font-normal text-gray-400">(উদ্ধৃতি হিসেবে প্রদর্শিত হবে)</span>
+          </label>
+          <textarea name="" value={bani}
+            onChange={e => setBani(e.target.value)} id="" className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 transition-shadow resize-none leading-relaxed" placeholder={`${label}-এর বিশেষ বাণী বা উক্তি লিখুন...`} rows={4}></textarea>
+          {/* <ReactQuill
+            theme="snow"
+            value={bani}
+            onChange={setBani}
+            modules={quillModules}
+            formats={quillFormats}
+            placeholder={`${label}-এর বিশেষ বাণী বা উক্তি লিখুন...`}
+            style={{ height: "160px", marginBottom: "50px" }}
+          /> */}
+        </div>
+
+        {/* Save */}
+        <div className="flex items-center gap-4 pt-10">
           <button
             onClick={handleSave}
             disabled={saving}

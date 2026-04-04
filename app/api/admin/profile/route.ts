@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
       name:        doc.name        ?? "",
       photo:       doc.photo       ?? "",
       description: doc.description ?? "",
+      bani:        doc.bani        ?? "",  
     })
   } catch (err) {
     console.error("Profile GET error:", err)
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
     const type        = (formData.get("type")        as string)?.trim()
     const name        = (formData.get("name")        as string)?.trim()
     const description = (formData.get("description") as string)?.trim()
+    const bani        = (formData.get("bani")        as string)?.trim()
     const file        = formData.get("photo") as File | null
 
     if (!type || !name) {
@@ -60,6 +62,7 @@ export async function POST(req: NextRequest) {
       type,
       name,
       description: description ?? "",
+      bani:        bani        ?? "",
       updatedAt:   new Date(),
     }
     if (photoUrl) $set.photo = photoUrl

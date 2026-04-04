@@ -110,7 +110,7 @@ export default function ProfileSection() {
                           <div className="w-52 h-52 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110"
                             style={{ outline: `3px solid ${p.index === 0 ? "#c9a84c" : "#1e3a5f"}`, outlineOffset: "2px" }}>
                             {p.data.photo ? (
-                              <img src={p.data.photo} alt={p.data.name} className="w-full h-full object-cover" />
+                              <img src={p.data.photo} alt={p.data.name} className="w-full h-full object-cover object-top" />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center text-lg font-bold text-white"
                                 style={{ background: p.index === 0 ? "linear-gradient(135deg,#c9a84c,#f0c040)" : "linear-gradient(135deg,#0f1b2d,#1e3a5f)" }}>

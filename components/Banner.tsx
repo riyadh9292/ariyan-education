@@ -1,12 +1,11 @@
 "use client"
 import { useEffect, useState, useCallback } from "react"
-import Image from "next/image"
 
 interface BannerImage { id: string; url: string; caption: string }
 
 const FALLBACK: BannerImage = {
   id: "fallback",
-  url: "https://i.ibb.co.com/4Z8PpKZV/tim-mossholder-WE-Kv-ZB1l0-unsplash.jpg",
+  url: "/site-logo.png",
   caption: "",
 }
 

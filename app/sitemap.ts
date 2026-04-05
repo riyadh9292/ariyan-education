@@ -13,42 +13,40 @@ const staticRoutes = [
   { path: "/results",                  priority: 0.9,  changeFrequency: "weekly"  },
 
   // Institution
-  { path: "/about",                    priority: 0.8,  changeFrequency: "monthly" },
-  { path: "/objectives",               priority: 0.7,  changeFrequency: "monthly" },
+  { path: "/about-us",                 priority: 0.8,  changeFrequency: "monthly" },
+  { path: "/mission",                  priority: 0.7,  changeFrequency: "monthly" },
   { path: "/history",                  priority: 0.7,  changeFrequency: "monthly" },
   { path: "/annual-plan",              priority: 0.6,  changeFrequency: "monthly" },
   { path: "/contact",                  priority: 0.8,  changeFrequency: "monthly" },
 
   // Administration
-  { path: "/founder-info",             priority: 0.7,  changeFrequency: "monthly" },
-  { path: "/principal-info",           priority: 0.7,  changeFrequency: "monthly" },
+  { path: "/profile/founder",             priority: 0.7,  changeFrequency: "monthly" },
+  { path: "/profile/principal",           priority: 0.7,  changeFrequency: "monthly" },
 
   // Staff
   { path: "/staff",                    priority: 0.7,  changeFrequency: "monthly" },
 
   // Academic
   { path: "/class-routine",            priority: 0.8,  changeFrequency: "monthly" },
-  { path: "/holidays",                 priority: 0.7,  changeFrequency: "monthly" },
-  { path: "/fees",                     priority: 0.8,  changeFrequency: "monthly" },
+  { path: "/holiday-list",                 priority: 0.7,  changeFrequency: "monthly" },
+  { path: "/courses",                     priority: 0.8,  changeFrequency: "monthly" },
 
   // Admission
   { path: "/prospectus",               priority: 0.9,  changeFrequency: "monthly" },
-  { path: "/admission-rules",          priority: 0.8,  changeFrequency: "monthly" },
-  { path: "/admission-process",        priority: 0.8,  changeFrequency: "monthly" },
-  { path: "/admission-exam-result",    priority: 0.9,  changeFrequency: "weekly"  },
-  { path: "/admission-exam-question",  priority: 0.7,  changeFrequency: "monthly" },
+  { path: "/rules",          priority: 0.8,  changeFrequency: "monthly" },
+  { path: "/result",        priority: 0.8,  changeFrequency: "monthly" },
+  { path: "/questions",    priority: 0.9,  changeFrequency: "weekly"  },
+  { path: "/results",        priority: 0.8,  changeFrequency: "monthly" },
+//   { path: "/admission-exam-question",  priority: 0.7,  changeFrequency: "monthly" },
 
   // Exam
   { path: "/exam-rules",               priority: 0.7,  changeFrequency: "monthly" },
-  { path: "/exam-schedule",            priority: 0.9,  changeFrequency: "weekly"  },
+  { path: "/schedule",            priority: 0.9,  changeFrequency: "weekly"  },
   { path: "/syllabus",                 priority: 0.8,  changeFrequency: "monthly" },
 
   // Gallery
   { path: "/academic-photos",          priority: 0.6,  changeFrequency: "weekly"  },
   { path: "/academic-videos",          priority: 0.6,  changeFrequency: "weekly"  },
-
-  // Courses
-  { path: "/courses",                  priority: 0.9,  changeFrequency: "monthly" },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

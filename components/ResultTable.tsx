@@ -60,7 +60,7 @@ export default function ResultTable() {
               <tr style={{ background: "linear-gradient(135deg, #0f1b2d, #1e3a5f)" }}>
                 <th className="text-left px-5 py-3.5 text-white font-semibold">ক্রমিক</th>
                 <th className="text-left px-5 py-3.5 text-white font-semibold">পরীক্ষার নাম</th>
-                <th className="text-left px-5 py-3.5 text-white font-semibold">শ্রেণি</th>
+                <th className="text-left px-5 py-3.5 text-white font-semibold">কোর্সের নাম</th>
                 <th className="text-left px-5 py-3.5 text-white font-semibold">সাল</th>
                 <th className="text-left px-5 py-3.5 text-white font-semibold">তারিখ</th>
                 <th className="text-center px-5 py-3.5 text-white font-semibold">ফলাফল</th>

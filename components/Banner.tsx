@@ -71,9 +71,9 @@ export default function Banner() {
           <div className="w-20 h-1 mx-auto my-4 rounded-full"
             style={{ background: "linear-gradient(90deg, #c9a84c, #f0c040)" }} />
           <p className="text-lg font-medium" style={{ color: "#fde68a" }}>মূল লক্ষ্য হলো যুবক ও তরুণীদের আধুনিক কর্মমুখী শিক্ষায় শিক্ষিত করে তোলা।</p>
-          {images[current]?.caption && (
+          {/* {images[current]?.caption && (
             <p className="mt-4 text-white/70 text-sm italic">{images[current].caption}</p>
-          )}
+          )} */}
         </div>
       </div>
 

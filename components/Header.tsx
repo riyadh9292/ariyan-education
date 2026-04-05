@@ -60,7 +60,7 @@ export default async function Header() {
             <img
               src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png"
               alt="আরিয়ান এডুকেশন সেন্টার"
-              className="h-14 w-auto object-contain"
+              className="h-14 w-auto object-contain scale-150"
             />
         </Link>
           <MobileNav menu={menu} />

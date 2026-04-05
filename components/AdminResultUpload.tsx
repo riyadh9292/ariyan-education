@@ -138,11 +138,11 @@ export default function AdminResultUpload() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                শ্রেণি <span className="text-red-500">*</span>
+                কোর্সের নাম <span className="text-red-500">*</span>
               </label>
               <input
                 className="border rounded-lg px-3 py-2 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="যেমন: ষষ্ঠ-দশম"
+                placeholder="ম্যাটস ভর্তি পরীক্ষার ফলাফল"
                 value={examClass}
                 onChange={e => setExamClass(e.target.value)}
               />
@@ -245,7 +245,7 @@ export default function AdminResultUpload() {
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-100">
                   <th className="text-left px-4 py-3 font-semibold text-gray-600">পরীক্ষার নাম</th>
-                  <th className="text-left px-4 py-3 font-semibold text-gray-600">শ্রেণি</th>
+                  <th className="text-left px-4 py-3 font-semibold text-gray-600">কোর্সের নাম</th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-600">সাল</th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-600">তারিখ</th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-600">ফাইল</th>

@@ -53,7 +53,7 @@ export default async function Header() {
         </div>
 
         {/* ── Mobile: school name + hamburger ── hidden above 1200px ── */}
-        <div className="flex xl:hidden items-center flex-1 justify-between">
+        <div className="flex xl:hidden items-center flex-1 justify-between h-[50px]">
           <Link
             href="/"
             className="flex items-center justify-center w-9 h-9 rounded-lg  flex-shrink-0 transition-all duration-200 hover:scale-110">

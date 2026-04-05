@@ -105,7 +105,7 @@ export default function StaffCards() {
                         }}
                       >
                         {member.photo ? (
-                          <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                          <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-2xl font-bold text-white"
                             style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
@@ -127,7 +127,7 @@ export default function StaffCards() {
                   <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.97)" }}>
                     <ul className="divide-y divide-gray-50">
 
-                      <li className="flex items-start gap-3 px-4 py-3 hover:bg-blue-50/60 transition-colors">
+                      <li className="flex items-start gap-3 px-4 py-2 hover:bg-blue-50/60 transition-colors">
                         <span
   className="mt-0.5 shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
   style={{ background: "linear-gradient(135deg, #0f1b2d, #1e3a5f)" }}

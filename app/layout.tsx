@@ -179,7 +179,7 @@ const jsonLd = {
     "availableLanguage": ["Bengali", "English"],
   },
   "sameAs": [
-    "https://www.facebook.com/share/18DXPba2SH/",
+    "https://www.facebook.com/ariyanskilledtangail",
     "https://www.linkedin.com/in/ariyan-skilled-academy-tangail/"
   ],
 }

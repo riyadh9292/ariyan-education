@@ -90,7 +90,7 @@ export default function ProfileSection() {
                 ))}
               </div>
             ) : (
-              <ul className="grid grid-cols-2 xl:grid-cols-1 justify-center divide-y divide-gray-50">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 justify-center divide-y divide-gray-50">
                 {profiles.map((p) => {
                   if (!p.data) return null
                   return (
@@ -107,7 +107,7 @@ export default function ProfileSection() {
                       >
                         {/* Photo */}
                         <div className="relative flex-shrink-0">
-                          <div className="w-52 h-52 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110"
+                          <div className="w-40 h-40 md:w-52 md:h-52 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110"
                             style={{ outline: `3px solid ${p.index === 0 ? "#c9a84c" : "#1e3a5f"}`, outlineOffset: "2px" }}>
                             {p.data.photo ? (
                               <img src={p.data.photo} alt={p.data.name} className="w-full h-full object-cover object-top" />

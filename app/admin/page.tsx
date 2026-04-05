@@ -117,8 +117,6 @@ export default function AdminPage() {
     }`
 
   if (!mounted) return null
-
-  console.log(parentSlug,"parentSlug");
   
 
   return (

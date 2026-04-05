@@ -41,7 +41,7 @@ export const metadata = {
     siteName: "আরিয়ান স্কিলড একাডেমি",
     images: [
       {
-        url: "https://ariyanskilledacademy.com/vercel.svg",
+        url: "https://ariyanskilledacademy.com/site-logo.png",
         width: 1200,
         height: 630,
       },

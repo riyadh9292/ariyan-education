@@ -33,7 +33,7 @@ export default function PageContent({ slug, defaultTitle }: Props) {
   const isSpecialPage = ["results", "staff", "academic-photos", "academic-videos"].includes(slug)
 
   return (
-    <div className="w-[96%] sm:w-[80vw] mx-auto py-16 px-6">
+    <div className="w-[99%] sm:w-[80vw] mx-auto py-16 px-0 sm:px-6">
       {/* <h1 className="text-3xl font-bold mb-6">{title}</h1> */}
 
       {loading && !isSpecialPage ? (

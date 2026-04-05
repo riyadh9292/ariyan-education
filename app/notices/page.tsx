@@ -30,7 +30,7 @@ export default async function NoticesPage() {
   const notices = await getAllNotices()
 
   return (
-    <div className="w-[96%] sm:w-[80vw] mx-auto py-16 px-6">
+    <div className="w-[99%] sm:w-[80vw] mx-auto py-16 px-0 sm:px-6">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold text-gray-800">সকল নোটিশ</h1>
         <Link href="/" className="text-sm text-blue-600 hover:underline flex items-center gap-1">

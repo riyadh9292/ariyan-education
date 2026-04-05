@@ -18,10 +18,7 @@ export default async function Footer() {
               <Link href="/" className="flex items-center gap-3 group w-fit">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 transition-transform group-hover:scale-105 duration-300"
                   style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0f1b2d" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                  </svg>
+                  <img src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png" alt="Whats App Image 2026 03 30 at 09 27 46 removebg preview" className="w-full h-full object-contain scale-[175%]" />
                 </div>
                 <div>
                   <div className="text-white font-bold text-lg leading-tight">আরিয়ান স্কিলড</div>

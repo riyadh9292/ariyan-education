@@ -54,11 +54,15 @@ export default async function Header() {
 
         {/* ── Mobile: school name + hamburger ── hidden above 1200px ── */}
         <div className="flex xl:hidden items-center flex-1 justify-between">
-          <img
-    src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png"
-    alt="আরিয়ান এডুকেশন সেন্টার"
-    className="h-14 w-auto object-contain"
-  />
+          <Link
+            href="/"
+            className="flex items-center justify-center w-9 h-9 rounded-lg  flex-shrink-0 transition-all duration-200 hover:scale-110">
+            <img
+              src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png"
+              alt="আরিয়ান এডুকেশন সেন্টার"
+              className="h-14 w-auto object-contain"
+            />
+        </Link>
           <MobileNav menu={menu} />
         </div>
 

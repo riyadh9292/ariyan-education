@@ -12,6 +12,9 @@ import AdminVideoGallery  from "@/components/AdminVideoGallery"
 import AdminPhotoGallery  from "@/components/AdminPhotoGallery"
 import AdminBannerUpload  from "@/components/AdminBannerUpload"
 import AdminProfile       from "@/components/AdminProfile"
+import AdminRoutineUpload  from "@/components/AdminRoutineUpload"
+import AdminAdmissionQuestions from "@/components/AdminQuestionsUpload"
+import AdminAdmissionResult from "@/components/AdminAdmissionResult"
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false })
 
@@ -392,7 +395,10 @@ function AdminContent({ onLogout }: { onLogout: () => void }) {
            pageSlug   === "results"      ? <AdminResultUpload /> :
            pageSlug   === "staff"        ? <AdminStaffTable /> :
            pageSlug   === "academic-photos" ? <AdminPhotoGallery /> :
-           pageSlug   === "academic-videos" ? <AdminVideoGallery /> : (
+           pageSlug   === "academic-videos" ? <AdminVideoGallery />:
+           pageSlug   === "class-routine" ? <AdminRoutineUpload /> :
+           pageSlug   === "questions" ? <AdminAdmissionQuestions /> :
+           pageSlug   === "result" ? <AdminAdmissionResult /> : (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
               {loading ? (

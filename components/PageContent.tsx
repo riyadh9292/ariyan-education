@@ -7,6 +7,9 @@ import VideoGallery from "@/components/VideoGallery"
 import ContactPage from "./ContactPage"
 import PageWrapper from "./PageWrapper"
 import CoursesSection from "./CoursesSection"
+import RoutineTable from "./RoutineTable"
+import AdmissionTestQuestions from "./AdmissionTestQuestions"
+import AdmissionTestResult from "./AdmissionTestResult"
 
 interface Props {
   slug        : string
@@ -55,9 +58,15 @@ export default function PageContent({ slug, defaultTitle }: Props) {
         <VideoGallery />
       ) : slug === "contact" ? (
         <ContactPage content={content} title={title} />
-      ):slug === "courses" ? (
+      ) : slug === "courses" ? (
         <CoursesSection />
-      ): content ? (
+      ) : slug === "class-routine" ? (
+        <RoutineTable />
+      ) : slug === "questions" ? (
+        <AdmissionTestQuestions />
+      ) : slug === "result" ? (
+        <AdmissionTestResult />
+      ) : content ? (
         <PageWrapper
           title={title}
           subtitle=""

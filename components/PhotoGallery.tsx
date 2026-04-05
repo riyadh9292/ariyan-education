@@ -54,7 +54,7 @@ export default function PhotoGallery() {
     <>
       <PageWrapper
         title="ফটো গ্যালারী"
-        subtitle={loading ? "" : `মোট ${photos.length}টি ছবি`}
+        subtitle={loading ? "" : `মোট ${photos.length.toLocaleString("bn-BD")}টি ছবি`}
         icon={galleryIcon}
       >
         <div className="-mx-5 -mb-6 -mt-1">

@@ -110,7 +110,7 @@ export default async function NoticesPage() {
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-6">
-        মোট {notices.length}টি নোটিশ
+        মোট {notices.length.toLocaleString("bn-BD")}টি নোটিশ
       </p>
     </div>
   )

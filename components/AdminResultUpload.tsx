@@ -223,7 +223,7 @@ export default function AdminResultUpload() {
         <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
           <div>
             <h2 className="font-semibold text-gray-800">আপলোড করা ফলাফল</h2>
-            <p className="text-xs text-gray-500 mt-0.5">মোট {records.length}টি ফলাফল</p>
+            <p className="text-xs text-gray-500 mt-0.5">মোট {records.length.toLocaleString("bn-BD")}টি ফলাফল</p>
           </div>
           <button onClick={fetchRecords} className="text-xs text-blue-600 hover:underline">
             রিফ্রেশ

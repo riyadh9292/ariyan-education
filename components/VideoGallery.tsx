@@ -62,12 +62,12 @@ export default function VideoGallery() {
     setPlaying(videos[i])
     setPlayingIndex(i)
   }
-
+  
   return (
     <>
       <PageWrapper
         title="ভিডিও গ্যালারী"
-        subtitle={loading ? "" : `মোট ${videos.length}টি ভিডিও`}
+        subtitle={loading ? "" : `মোট ${videos.length.toLocaleString("bn-BD")}টি ভিডিও`}
         icon={videoIcon}
       >
         <div className="-mx-5 -mb-6 -mt-1">
@@ -110,11 +110,11 @@ export default function VideoGallery() {
 
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-gray-900">
-                    {getThumbnail(video) ? (
-                      <img
-                        src={getThumbnail(video)}
-                        alt={video.title}
+                    {video.url ? (
+                      <video
+                        src={video.url}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        playsInline
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"

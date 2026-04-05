@@ -40,7 +40,7 @@ export default function Banner() {
       {images.map((img, i) => (
         <div key={img.id} className="absolute inset-0 transition-opacity duration-700"
           style={{ opacity: i === current ? (fading ? 0 : 1) : 0, zIndex: i === current ? 1 : 0 }}>
-          <img src={img.url} alt={img.caption || "Banner"} className="w-full h-full object-cover" />
+          <img src={img.url} alt={img.caption || "Banner"} className="w-full h-full object-cover object-center" />
         </div>
       ))}
 

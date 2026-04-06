@@ -48,10 +48,10 @@ export default function Banner() {
         style={{ background: "linear-gradient(135deg, rgba(15,27,45,0.82) 0%, rgba(30,58,95,0.72) 100%)" }} />
 
       {/* Content */}
-      <div className="absolute inset-0 z-20 flex flex-col items-center justify-start md:justify-center text-center px-6 mt-2.5 md:mt-0">
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-start md:justify-center text-center px-6 mt-5 sm:mt-10 md:mt-0">
         <div className="max-w-3xl mx-auto">
           <div className="">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-5 justify-center">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-3 sm:mb-5 justify-center">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl"
             style={{ background: "linear-gradient(135deg, #c9a84c, #f0c040)" }}>
               <img src="https://i.ibb.co.com/Lz5Ns3K0/Whats-App-Image-2026-03-30-at-09-27-46-removebg-preview.png" alt="Whats App Image 2026 03 30 at 09 27 46 removebg preview" className="w-full h-full object-contain scale-[175%]" />
@@ -67,7 +67,7 @@ export default function Banner() {
           </div>
           
           
-          <div className="w-20 h-1 mx-auto my-4 rounded-full"
+          <div className="w-20 h-1 mx-auto my-4 rounded-full hidden sm:block"
             style={{ background: "linear-gradient(90deg, #c9a84c, #f0c040)" }} />
           <p className="text-lg font-medium" style={{ color: "#fde68a" }}>মূল লক্ষ্য হলো যুবক ও তরুণীদের আধুনিক কর্মমুখী শিক্ষায় শিক্ষিত করে তোলা।</p>
           {/* {images[current]?.caption && (

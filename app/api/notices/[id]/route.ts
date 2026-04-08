@@ -46,11 +46,13 @@ export async function GET(
     })
  
     const buffer = Buffer.concat(chunks)
+
+    const safeFilename = encodeURIComponent(notice.title ?? "notice") + ".pdf"
  
     return new NextResponse(buffer, {
       headers: {
         "Content-Type"       : "application/pdf",
-        "Content-Disposition": `inline; filename="${notice.title ?? "notice"}.pdf"`,
+        "Content-Disposition": `inline; filename="notice.pdf"; filename*=UTF-8''${safeFilename}`,
         "Content-Length"     : buffer.length.toString(),
         "Cache-Control"      : "private, max-age=3600",
       },

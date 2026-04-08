@@ -14,9 +14,15 @@ export async function POST(req: Request) {
 
     const buffer = Buffer.from(await file.arrayBuffer())
 
-    const uploadStream = bucket.openUploadStream(file.name)
+    const uploadStream = bucket.openUploadStream(file.name, {
+      metadata: { title, originalName: file.name },
+    })
 
-    uploadStream.end(buffer)
+    await new Promise<void>((resolve, reject) => {
+      uploadStream.on("finish", resolve)
+      uploadStream.on("error",  reject)
+      uploadStream.end(buffer)
+    })
 
     const fileId = uploadStream.id
 

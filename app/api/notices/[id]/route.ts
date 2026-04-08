@@ -16,7 +16,7 @@ export async function GET(
     let notice = null
     if (ObjectId.isValid(id)) {
       notice =
-        (await db.collection("notices").findOne({ fileId: new ObjectId(id) })) ??
+        (await db.collection("notices").findOne({ fileId: new ObjectId(id) })) ||
         (await db.collection("notices").findOne({ _id:    new ObjectId(id) }))
     }
  
@@ -81,7 +81,12 @@ export async function DELETE(
 
     // delete file from GridFS
     if (notice.fileId) {
-      await bucket.delete(new ObjectId(notice.fileId))
+      try {
+        await bucket.delete(new ObjectId(notice.fileId))
+      } catch (fileErr) {
+        // File may already be missing from GridFS — log and continue
+        console.warn(`GridFS file not found for notice ${id}, skipping file deletion:`, fileErr)
+      }
     }
 
     // delete notice document
